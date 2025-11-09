@@ -9,7 +9,7 @@
  */
 import java.util.Scanner;
 
-public class Giris {
+public class GeometriHesap {
 
     // METOT 1: Kare alani
     public static double calculateSquareArea(double side) {
