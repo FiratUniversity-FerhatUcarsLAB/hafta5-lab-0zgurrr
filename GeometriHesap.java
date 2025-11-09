@@ -58,7 +58,7 @@ public class Giris {
     public static double calculateTriangleArea(double base, double height) {
         // Alan = (taban * yukseklik) / 2
 
-        return base*height/2; // Degistirin
+        return base*height/2;
     }
 
     // METOT 8: Ucgen cevresi
@@ -72,7 +72,7 @@ public class Giris {
 
         System.out.println("=== GEOMETRIK SEKIL HESAPLAYICI ===");
         System.out.println();
-
+        
         // KARE bilgileri
         System.out.println("KARE:");
         System.out.print("Kenar uzunlugu (cm): ");
