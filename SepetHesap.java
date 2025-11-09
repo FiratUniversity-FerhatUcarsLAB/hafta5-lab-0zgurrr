@@ -9,41 +9,45 @@
  */
 import java.util.Scanner;
 
-public class SepetHesap {
+public class SepetHesap{
 
     // Sabitler
     final static double VAT_RATE = 0.18;      // KDV Oranı (%18)
     final static double SHIPPING_FEE = 29.99; // Sabit kargo ücreti (TL)
 
-    // METOTLAR
-
-    // calculateLineTotal: Bir ürünün toplam fiyatını (fiyat x adet) hesaplar
+    // METOT 1: Bir urunun toplam fiyatini hesaplar (fiyat * adet)
     public static double calculateLineTotal(double price, int quantity) {
+        // Satir Toplami = fiyat * adet
         return price * quantity;
     }
 
-    // calculateSubtotal: Sepetteki tüm ürünlerin ara toplamını hesaplar
+    // METOT 2: Sepetteki 3 urunun ara toplamini hesaplar
     public static double calculateSubtotal(double line1, double line2, double line3) {
+        // Ara Toplam = urun1 + urun2 + urun3
         return line1 + line2 + line3;
     }
 
-    // calculateDiscountAmount: Ara toplam üzerinden indirim tutarını hesaplar
+    // METOT 3: Indirim tutarini hesaplar
     public static double calculateDiscountAmount(double subtotal, double discountPercentage) {
-        return subtotal * (discountPercentage / 100);
+        // Indirim Tutari = araToplam * (indirimYuzdesi / 100)
+        return subtotal * (discountPercentage / 100.0);
     }
 
-    // applyDiscount: Ara toplamdan indirim tutarını düşerek indirimli toplamı verir
+    // METOT 4: Indirimli fiyati hesaplar (araToplam - indirimTutari)
     public static double applyDiscount(double subtotal, double discountAmount) {
+        // Indirimli Toplam = araToplam - indirimTutari
         return subtotal - discountAmount;
     }
 
-    // calculateVAT: İndirimli toplam üzerinden KDV tutarını hesaplar
+    // METOT 5: KDV tutarini hesaplar (indirimliTutar * kdvOrani)
     public static double calculateVAT(double discountedTotal, double vatRate) {
+        // KDV Tutari = indirimliTutar * VAT_RATE
         return discountedTotal * vatRate;
     }
 
-    // calculateGrandTotal: İndirimli toplam, KDV ve kargo ücreti eklenerek genel toplamı verir
+    // METOT 6: Genel toplami hesaplar (indirimliTutar + kdv + kargo)
     public static double calculateGrandTotal(double discountedTotal, double vatAmount, double shippingFee) {
+        // Genel Toplam = indirimliTutar + kdvTutari + kargoUcreti
         return discountedTotal + vatAmount + shippingFee;
     }
 
@@ -59,7 +63,7 @@ public class SepetHesap {
         double price1 = input.nextDouble();
         System.out.print("  Adet: ");
         int qty1 = input.nextInt();
-        
+
         // URUN 2 Bilgileri
         System.out.println("\nURUN 2:");
         System.out.print("  Birim Fiyat (TL): ");
@@ -78,29 +82,17 @@ public class SepetHesap {
         System.out.print("\nIndirim Kuponu Yuzdesi (%): ");
         double discountPercent = input.nextDouble();
 
-        // HESAPLAMALAR - Metotları çağırarak yapıyoruz
+        // HESAPLAMALARI YAP - Metotlari cagir
+        double line1Total = calculateLineTotal(price1, qty1); // Urun 1 toplam
+        double line2Total = calculateLineTotal(price2, qty2); // Urun 2 toplam
+        double line3Total = calculateLineTotal(price3, qty3); // Urun 3 toplam
+        double subtotal = calculateSubtotal(line1Total, line2Total, line3Total); // Ara toplam
+        double discountAmount = calculateDiscountAmount(subtotal, discountPercent); // Indirim tutari
+        double discountedTotal = applyDiscount(subtotal, discountAmount); // Indirimli toplam
+        double vatAmount = calculateVAT(discountedTotal, VAT_RATE); // KDV tutari
+        double grandTotal = calculateGrandTotal(discountedTotal, vatAmount, SHIPPING_FEE); // Genel toplam
 
-        // 1. Ürünlerin satış toplamlarını hesapla
-        double line1Total = calculateLineTotal(price1, qty1);
-        double line2Total = calculateLineTotal(price2, qty2);
-        double line3Total = calculateLineTotal(price3, qty3);
-
-        // 2. Ara toplamı hesapla
-        double subtotal = calculateSubtotal(line1Total, line2Total, line3Total);
-
-        // 3. İndirim tutarını hesapla
-        double discountAmount = calculateDiscountAmount(subtotal, discountPercent);
-
-        // 4. İndirimli toplamı hesapla
-        double discountedTotal = applyDiscount(subtotal, discountAmount);
-
-        // 5. KDV tutarını hesapla (indirimli toplam üzerinden)
-        double vatAmount = calculateVAT(discountedTotal, VAT_RATE);
-
-        // 6. Genel toplamı hesapla (indirimli toplam + KDV + kargo)
-        double grandTotal = calculateGrandTotal(discountedTotal, vatAmount, SHIPPING_FEE);
-
-        // SONUÇLARI YAZDIR
+        // SONUCLARI YAZDIR
         System.out.println("\n========================================");
         System.out.println("           SIPARIS OZETI");
         System.out.println("========================================");
@@ -116,6 +108,8 @@ public class SepetHesap {
         System.out.println("----------------------------------------");
         System.out.printf("GENEL TOPLAM                 : %.2f TL\n", grandTotal);
         System.out.println("========================================");
+
         input.close();
     }
 }
+
