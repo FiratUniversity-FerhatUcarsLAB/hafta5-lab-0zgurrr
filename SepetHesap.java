@@ -10,37 +10,46 @@
 import java.util.Scanner;
 
 public class SepetHesap {
+
     // Sabitler
     final static double VAT_RATE = 0.18;      // KDV Oranı (%18)
     final static double SHIPPING_FEE = 29.99; // Sabit kargo ücreti (TL)
 
     // METOTLAR
+
+    // calculateLineTotal: Bir ürünün toplam fiyatını (fiyat x adet) hesaplar
     public static double calculateLineTotal(double price, int quantity) {
         return price * quantity;
     }
 
+    // calculateSubtotal: Sepetteki tüm ürünlerin ara toplamını hesaplar
     public static double calculateSubtotal(double line1, double line2, double line3) {
         return line1 + line2 + line3;
     }
 
+    // calculateDiscountAmount: Ara toplam üzerinden indirim tutarını hesaplar
     public static double calculateDiscountAmount(double subtotal, double discountPercentage) {
         return subtotal * (discountPercentage / 100);
     }
 
+    // applyDiscount: Ara toplamdan indirim tutarını düşerek indirimli toplamı verir
     public static double applyDiscount(double subtotal, double discountAmount) {
         return subtotal - discountAmount;
     }
 
+    // calculateVAT: İndirimli toplam üzerinden KDV tutarını hesaplar
     public static double calculateVAT(double discountedTotal, double vatRate) {
         return discountedTotal * vatRate;
     }
 
+    // calculateGrandTotal: İndirimli toplam, KDV ve kargo ücreti eklenerek genel toplamı verir
     public static double calculateGrandTotal(double discountedTotal, double vatAmount, double shippingFee) {
         return discountedTotal + vatAmount + shippingFee;
     }
 
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
+
         System.out.println("=== E-TICARET SEPET HESAPLAYICI ===");
         System.out.println("\nLutfen 3 urunun bilgilerini girin:");
 
@@ -50,7 +59,7 @@ public class SepetHesap {
         double price1 = input.nextDouble();
         System.out.print("  Adet: ");
         int qty1 = input.nextInt();
-
+        
         // URUN 2 Bilgileri
         System.out.println("\nURUN 2:");
         System.out.print("  Birim Fiyat (TL): ");
@@ -69,17 +78,29 @@ public class SepetHesap {
         System.out.print("\nIndirim Kuponu Yuzdesi (%): ");
         double discountPercent = input.nextDouble();
 
-        // HESAPLAMALAR
+        // HESAPLAMALAR - Metotları çağırarak yapıyoruz
+
+        // 1. Ürünlerin satış toplamlarını hesapla
         double line1Total = calculateLineTotal(price1, qty1);
         double line2Total = calculateLineTotal(price2, qty2);
         double line3Total = calculateLineTotal(price3, qty3);
+
+        // 2. Ara toplamı hesapla
         double subtotal = calculateSubtotal(line1Total, line2Total, line3Total);
+
+        // 3. İndirim tutarını hesapla
         double discountAmount = calculateDiscountAmount(subtotal, discountPercent);
+
+        // 4. İndirimli toplamı hesapla
         double discountedTotal = applyDiscount(subtotal, discountAmount);
+
+        // 5. KDV tutarını hesapla (indirimli toplam üzerinden)
         double vatAmount = calculateVAT(discountedTotal, VAT_RATE);
+
+        // 6. Genel toplamı hesapla (indirimli toplam + KDV + kargo)
         double grandTotal = calculateGrandTotal(discountedTotal, vatAmount, SHIPPING_FEE);
 
-        // SONUCLARI YAZDIR
+        // SONUÇLARI YAZDIR
         System.out.println("\n========================================");
         System.out.println("           SIPARIS OZETI");
         System.out.println("========================================");
