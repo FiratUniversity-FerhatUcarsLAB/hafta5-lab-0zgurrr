@@ -71,10 +71,9 @@ public class Giris {
         Scanner input = new Scanner(System.in);
 
         System.out.println("=== GEOMETRIK SEKIL HESAPLAYICI ===");
-        System.out.println();
-        
+
         // KARE bilgileri
-        System.out.println("KARE:");
+        System.out.println("\nKARE:");
         System.out.print("Kenar uzunlugu (cm): ");
         double squareSide = input.nextDouble();
 
