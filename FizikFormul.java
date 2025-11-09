@@ -8,69 +8,94 @@
  * hesaplamalar yapar.
  */
 import java.util.Scanner;
-public class FizikFormul {
 
+public class FizkFormul {
+
+    // Sabit: Yercekimi ivmesi
     final static double GRAVITY = 9.8; // m/s²
 
+    // METOT 1: Hız hesapla (v = s / t)
     public static double calculateVelocity(double distance, double time) {
-        return distance/time;
+        // v = mesafe / zaman
+        return distance / time;
     }
 
+    // METOT 2: İvme hesapla (a = Δv / t)
     public static double calculateAcceleration(double velocityChange, double time) {
-        return velocityChange/time;
+        // a = hiz degisimi / zaman
+        return velocityChange / time;
     }
 
+    // METOT 3: Kuvvet hesapla (F = m * a)
     public static double calculateForce(double mass, double acceleration) {
-        return mass*acceleration;
+        // F = kutle * ivme
+        return mass * acceleration;
     }
 
+    // METOT 4: İş hesapla (W = F * d)
     public static double calculateWork(double force, double distance) {
-        return force*distance;
+        // W = kuvvet * mesafe
+        return force * distance;
     }
 
+    // METOT 5: Güç hesapla (P = W / t)
     public static double calculatePower(double work, double time) {
-        return work/time;
+        // P = is / zaman
+        return work / time;
     }
 
+    // METOT 6: Kinetik enerji (KE = 0.5 * m * v²)
     public static double calculateKineticEnergy(double mass, double velocity) {
-        return 0.5*mass*Math.pow(velocity, 2);
+        // KE = 0.5 * kutle * (hiz * hiz)
+        return 0.5 * mass * Math.pow(velocity, 2);
     }
 
+    // METOT 7: Potansiyel enerji (PE = m * g * h)
     public static double calculatePotentialEnergy(double mass, double gravity, double height) {
-        return mass*gravity*height;
+        // PE = kutle * yercekimi * yukseklik
+        return mass * gravity * height;
     }
 
+    // METOT 8: Momentum (p = m * v)
     public static double calculateMomentum(double mass, double velocity) {
-        return mass*velocity;
+        // p = kutle * hiz
+        return mass * velocity;
     }
 
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
-        System.out.println("=== FIZIK FORMUL ASISTANI ===\n");
 
-        // TEMEL ÖLÇÜMLER
-        System.out.print("Kutle (kg): ");
+        System.out.println("=== FIZIK FORMUL ASISTANI ===");
+        System.out.println();
+
+        // TEMEL OLCUMLER
+        System.out.println("TEMEL OLCUMLER:");
+        System.out.print("\nKutle (kg): ");
         double mass = input.nextDouble();
+
         System.out.print("Mesafe (m): ");
         double distance = input.nextDouble();
+
         System.out.print("Zaman (s): ");
         double time = input.nextDouble();
+
         System.out.print("Hiz degisimi (m/s): ");
         double deltaV = input.nextDouble();
+
         System.out.print("Yukseklik (m): ");
         double height = input.nextDouble();
-        
-        // HESAPLAMALAR
-        double velocity = calculateVelocity(distance, time);
-        double acceleration = calculateAcceleration(deltaV, time);
-        double force = calculateForce(mass, acceleration);
-        double work = calculateWork(force, distance);
-        double power = calculatePower(work, time);
-        double kineticEnergy = calculateKineticEnergy(mass, velocity);
-        double potentialEnergy = calculatePotentialEnergy(mass, GRAVITY, height);
-        double momentum = calculateMomentum(mass, velocity);
 
-        // SONUÇLARI YAZDIR
+        // HESAPLAMALARI YAP - Metotlari cagir
+        double velocity = calculateVelocity(distance, time); // Hız
+        double acceleration = calculateAcceleration(deltaV, time); // İvme
+        double force = calculateForce(mass, acceleration); // Kuvvet
+        double work = calculateWork(force, distance); // İş
+        double power = calculatePower(work, time); // Güç
+        double kineticEnergy = calculateKineticEnergy(mass, velocity); // Kinetik enerji
+        double potentialEnergy = calculatePotentialEnergy(mass, GRAVITY, height); // Potansiyel enerji
+        double momentum = calculateMomentum(mass, velocity); // Momentum
+
+        // SONUCLARI YAZDIR
         System.out.println("\n========================================");
         System.out.println("        HESAPLAMA SONUCLARI");
         System.out.println("========================================");
@@ -91,4 +116,3 @@ public class FizikFormul {
         input.close();
     }
 }
-
